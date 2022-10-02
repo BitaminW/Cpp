@@ -34,5 +34,10 @@ void MoveDown(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos);
 
 void MoveRight(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos);
 
+void MoveLeft(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos);
+
 void MovePlayer(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos, char cinput);
 
+bool CheckEndPoint(_PPOINT pPlayerPos, _PPOINT pEndPos);
+
+void GameClearMessage();
