@@ -2,10 +2,7 @@
 
 using namespace std;
 
-
-
 int main() {
-
 
 	// 20 x 20 크기의 미로
 	
@@ -24,7 +21,12 @@ int main() {
 		OutPut(str_maze, &tPlayerPos);
 		cout << " W:위   S:아래    A:왼쪽    D:오른쪽    Q:종료 ";
 
+		if (CheckEndPoint(&tPlayerPos, &tEndPos)) {
+			GameClearMessage();
+			break;
+		}
 
+		// 사용자 입력 받기
 		char cinput = _getch();
 		
 		if (cinput == 'q' || cinput == 'Q')
