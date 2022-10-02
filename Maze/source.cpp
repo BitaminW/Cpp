@@ -98,6 +98,15 @@ void MoveRight(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos) {
 		}
 	}
 }
+void MoveLeft(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos) {
+	if (pPlayerPos->x - 1 >= 0) {
+
+		if (Maze[pPlayerPos->y][pPlayerPos->x - 1] != '0') {
+			--pPlayerPos->x;
+		}
+	}
+}
+
 
 
 /*
@@ -117,6 +126,7 @@ void MovePlayer(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos, char cinput){
 		break;
 	case 'a':
 	case 'A':
+		MoveLeft(Maze, pPlayerPos);
 		break;
 	case 'd':
 	case 'D':
@@ -125,4 +135,27 @@ void MovePlayer(char Maze[HEIGHT][WIDTH], _PPOINT pPlayerPos, char cinput){
 	}
 }
 
+bool CheckEndPoint(_PPOINT pPlayerPos, _PPOINT pEndPos) {
+	if (pPlayerPos->x == pEndPos->x && pPlayerPos->y == pEndPos->y) {
+		return 1;
+	}
+	return 0;
+}
 
+void GameClearMessage() {
+	system("cls");
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■□□□□□□□□□□■■■■■■■■■■■■□□□□□□■■■■■■■□□■■■■■■■■■" << endl;
+	cout << "■■■■■■■■□□■■■■■■■■■■■■■■■■■□□□□□□□□□□□□■■■■□□■■■■■■■■■" << endl;
+	cout << "■■■■■■■■□□■■■■■■■■■■■■■■■■■■■■■□□□■■■■■■■■■□□□□■■■■■■■" << endl;
+	cout << "■■■■■■■■□□□□□□□□□□■■■■■■■■■■■■□□■□□■■■■■■■■□□□□■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■□□□■■■■■■■■■■■■■■■□□■■■□□■■■■■■■□□■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■□□□■■■■■■■■■■■■■■□□■■■■■□□■■■■■■□□■■■■■■■■■" << endl;
+	cout << "■■■■■□□□□□□□□□□□□□□□■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■□□□□□□□□□□□■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■□□■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■□□■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■□□■■■■■■■■■■■" << endl;
+	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
+	
+}									 
