@@ -1,14 +1,11 @@
 #include <iostream>
 
-
-
-
 class MyString {
 
 private:
 	int   m_length;
 	char* m_str_data;
-	int	  memory_capacity;
+	int	  m_memory_capacity;
 
 public:
 	int length() const;
@@ -24,12 +21,14 @@ public:
 		m_str_data = new char[1];
 		m_str_data[0] = c;
 		m_length = 1;
+		m_memory_capacity = 1;
 	}
 
 	// 문자열로 생성
 	MyString(const char* str) {
 		m_length = strlen(str);
 		m_str_data = new char[m_length];
+		m_memory_capacity = m_length;
 
 		for (int i = 0; i != m_length; i++) {
 			m_str_data[i] = str[i];
@@ -39,6 +38,9 @@ public:
 	//복사 생성자
 	MyString(const MyString& str) {
 		m_length = str.m_length;
+		m_memory_capacity = str.m_length;
+		m_str_data = new char[m_length];
+
 		for (int i = 0; i != m_length; i++) {
 			m_str_data[i] = str.m_str_data[i];
 		}
@@ -49,7 +51,6 @@ public:
 	}
 
 };
-
 
 int MyString::length() const {
 	return m_length;
@@ -72,12 +73,12 @@ MyString& MyString::assign(const MyString& str) {
 	
 	/* 들어온 문자열이 기존 문자열 길이보다 긴 경우에 새롭게 동적할당
 		그렇지 않다면 기존 데이터에 덮어씌움					*/
-	if (str.m_length > memory_capacity) {
+	if (str.m_length > m_memory_capacity) {
 		
 		delete[] m_str_data;
 
 		m_str_data = new char[str.m_length];
-		memory_capacity = str.m_length;
+		m_memory_capacity = str.m_length;
 	}
 	for (int i = 0; i != str.m_length; i++) {
 		m_str_data[i] = str.m_str_data[i];
@@ -89,29 +90,38 @@ MyString& MyString::assign(const MyString& str) {
 }
 
 MyString& MyString::assign(const char* str) {
+	
 	int str_length = strlen(str);
-	if (str_length > memory_capacity) {
+	if (str_length > m_memory_capacity) {
 		delete[] m_str_data;
 
 		m_str_data = new char[str_length];
-		memory_capacity = str_length;
+		m_memory_capacity = str_length;
 	}
 	for (int i = 0; i != str_length; i++) {
 		m_str_data[i] = str[i];
 	}
 
 	m_length = str_length;
-
 	return *this;
 }
 
-int MyString::capacity() const { return memory_capacity; }
 
+int MyString::capacity() const { return m_memory_capacity; }
 
-int main() {
+void MyString::reserve(int size) {
+	
+	/*	만일 예약하려는 size가 현재 capacity보다 작다면
+		실행 되지않는다.*/
+	if (size > m_memory_capacity) {
+		char* prev_string_content = m_str_data;
 
-	MyString s1 = "hello";
-
-	s1.println();
-
+		m_str_data = new char[size];
+		m_memory_capacity = size;
+		
+		for (int i = 0; i != m_length; i++) {
+			m_str_data[i] = prev_string_content[i];
+		}
+		delete[] prev_string_content;
+	}
 }
