@@ -12,9 +12,11 @@ public:
 	void print() const;
 	void println() const;
 	int capacity() const;
+	void reserve(int size);
+	char at(int i) const;
 	MyString& assign(const char* str);
 	MyString& assign(const MyString& str);
-	void reserve(int size);
+	
 
 	// 문자 하나로 생성
 	MyString(char c) {
@@ -124,4 +126,26 @@ void MyString::reserve(int size) {
 		}
 		delete[] prev_string_content;
 	}
+}
+
+char MyString::at(int i) const {
+	if (i >= m_length || i < 0) {
+		return NULL;
+	}
+	else { return m_str_data[i]; }
+
+}
+
+int main() {
+
+	MyString str1("very very very long string..");
+	str1.println();
+
+	std::cout << "Before Capacity : " << str1.capacity() << "\n";
+	std::cout << "Before String length : " << str1.length() << "\n";
+
+	str1.reserve(30);
+	std::cout << "After Capacity : " << str1.capacity() << "\n";
+	std::cout << "After String length : " << str1.length() << "\n";
+	
 }
