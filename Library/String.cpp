@@ -18,7 +18,6 @@ public:
 	MyString& assign(const MyString& str);
 	
 
-	// 문자 하나로 생성
 	MyString(char c) {
 		m_str_data = new char[1];
 		m_str_data[0] = c;
@@ -26,7 +25,6 @@ public:
 		m_memory_capacity = 1;
 	}
 
-	// 문자열로 생성
 	MyString(const char* str) {
 		m_length = strlen(str);
 		m_str_data = new char[m_length];
@@ -37,7 +35,6 @@ public:
 		}
 	}
 
-	//복사 생성자
 	MyString(const MyString& str) {
 		m_length = str.m_length;
 		m_memory_capacity = str.m_length;
