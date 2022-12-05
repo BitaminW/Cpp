@@ -16,9 +16,15 @@ enum GameStaus{
 class DisplayManager {
 
 public:
-	DisplayManager() {}
+	DisplayManager() {
+		system("mode con cols=120 lines=60");
+	}
+	~DisplayManager() {}
+
 	void gotoxy(unsigned int x, unsigned int y);
 	void drawTitle();
+
+
 };
 
 // 게임의 흐름
@@ -32,6 +38,10 @@ public:
 		display_manager = new DisplayManager();
 		display_manager->drawTitle();
 	}
+
+	~GameManager() {
+		delete display_manager;
+	}
 	
 
 	/*void gameRun() {
@@ -43,7 +53,6 @@ public:
 
 
 };
-
 
 // 도형 클래스.
 class Block {
